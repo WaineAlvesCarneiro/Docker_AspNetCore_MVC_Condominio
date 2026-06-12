@@ -1,0 +1,72 @@
+﻿@model Docker_AspNetCore_MVC_Condominio.Web.Models.ImovelViewModel
+@{
+    ViewData["Title"] = "Dados do Morador";
+}
+
+<div class="card shadow-sm border-0 rounded-3 p-4 bg-white">
+    <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
+        <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-people text-primary fs-3"></i>
+            <h4 class="fw-bold text-secondary m-0">@ViewData["Title"]</h4>
+        </div>
+    </div>
+
+    <partial name="_ImovelBlocoApto" />
+
+    <div class="row g-4">
+        <div class="col-12 border-bottom pb-3">
+            <h6 class="fw-bold text-primary mb-3"><i class="bi bi-file-earmark-person me-1"></i> Dados Gerais do Morador</h6>
+            <div class="row g-3">
+                <div class="col-md-5">
+                    <small class="text-muted d-block">Nome Completo</small>
+                    <span class="fw-semibold text-dark fs-8">@Model.Morador!.Nome</span>
+                </div>
+                <div class="col-md-3">
+                    <small class="text-muted d-block">Celular / WhatsApp</small>
+                    <span class="fw-semibold text-dark fs-8"><i class="bi bi-whatsapp text-success me-1"></i> @Model.Morador!.Celular</span>
+                </div>
+                <div class="col-md-4">
+                    <small class="text-muted d-block">E-mail de Contato</small>
+                    <span class="fw-semibold text-dark fs-8">@(Model.Morador!.Email ?? "Não informado")</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 border-bottom pb-3">
+            <h6 class="fw-bold text-primary mb-3"><i class="bi bi-calendar-event me-1"></i> Contrato e Permanência</h6>
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <label class="form-label text-muted small fw-semibold d-block mb-2">Relação de Ocupação</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" value="1" asp-for="Morador.Proprietario" id="prop" checked readonly />
+                        <label class="form-check-label text-dark" for="prop">Proprietário</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" value="2" asp-for="Morador.Proprietario" id="inq" readonly />
+                        <label class="form-check-label text-dark" for="inq">Inquilino</label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <small class="text-muted d-block">Data de Entrada</small>
+                    <span class="text-dark d-block mt-1 fw-medium">@Model.Morador!.DataEntrada.ToString("dd/MM/yyyy")</span>
+                </div>
+                <div class="col-md-2">
+                    <small class="text-muted d-block">Data de Saída</small>
+                    <span class="badge @(Model.Morador.DataSaida == null ? "bg-success-subtle text-success border border-success-subtle" : "bg-danger-subtle text-danger border border-danger-subtle") px-2 py-1 rounded">
+                        @(Model.Morador.DataSaida == null ? "-Sem Saída-" : Model.Morador.DataSaida.Value.ToShortDateString())
+                    </span>
+                </div>
+                <div class="col-md-2">
+                    <small class="text-muted d-block">Status Atual</small>
+                    <span class="badge @(Model.Morador!.DataSaida == null ? "bg-success-subtle text-success border border-success-subtle" : "bg-danger-subtle text-danger border border-danger-subtle") px-2 py-1.5 rounded mt-1 fs-7">
+                        @(Model.Morador!.DataSaida == null ? "Ativo" : "Inativo")
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex gap-2 mt-1 pt-3">
+        <a asp-action="ListarMoradores" class="btn btn-secondary px-4">
+            <i class="bi bi-arrow-left-circle me-1"></i> Voltar para Lista
+        </a>
+    </div>
+</div>

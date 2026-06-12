@@ -1,0 +1,43 @@
+﻿@model Docker_AspNetCore_MVC_Condominio.Web.Models.ImovelViewModel
+@{
+    ViewData["Title"] = "Prontuário do Imóvel";
+}
+
+<div class="card shadow-sm border-0 rounded-3 p-4 bg-white">
+    <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
+        <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-house-fill text-primary fs-3"></i>
+            <h4 class="fw-bold text-secondary m-0">@ViewData["Title"]</h4>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+            @if (User.IsInRole("Sindico"))
+            {
+                <a asp-controller="Moradors" asp-action="CadastrarMoradores" asp-route-id="@Model.Imovel!.Id" class="btn btn-success d-flex align-items-center gap-1.5">
+                    <i class="bi bi-people-fill"></i> + Morador
+                </a>
+            }
+            <a asp-controller="Visitantes" asp-action="CadastrarVisitante" asp-route-id="@Model.Imovel!.Id" class="btn btn-info text-white d-flex align-items-center gap-2 shadow-sm fw-medium">
+                <i class="bi bi-person-plus-fill"></i> Liberar Visitante
+            </a>
+            <a asp-controller="Prestadores" asp-action="CadastrarPrestador" asp-route-id="@Model.Imovel!.Id" class="btn btn-secondary d-flex align-items-center gap-2 shadow-sm fw-medium">
+                <i class="bi bi-wrench-adjustable text-white"></i> Prestador de Serviço
+            </a>
+            <a asp-controller="EncomendasRecebidas" asp-action="CadastrarRecebida" asp-route-id="@Model.Imovel!.Id" class="btn btn-primary d-flex align-items-center gap-2 shadow-sm fw-medium">
+                <i class="bi bi-box-seam-fill"></i> Receber Encomenda
+            </a>
+            <a asp-controller="EncomendasEntregues" asp-action="CadastrarEntrega" asp-route-id="@Model.Imovel!.Id" class="btn btn-success d-flex align-items-center gap-2 shadow-sm fw-medium">
+                <i class="bi bi-box-seam-fill"></i> Entregar Encomenda
+            </a>
+        </div>
+    </div>
+
+    <partial name="_ImovelBlocoApto" />
+
+    <partial name="_ListaMoradoresImovel" />
+
+    <div class="d-flex gap-2 mt-4 pt-3 border-top">
+        <a asp-action="ListarImoveis" class="btn btn-secondary px-4">
+            <i class="bi bi-arrow-left-circle me-1"></i> Voltar para Lista
+        </a>
+    </div>
+</div>

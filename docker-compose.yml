@@ -1,0 +1,51 @@
+﻿services:
+
+  db_condominio_AspNetCore_MVC:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: db_condominio_AspNetCore_MVC
+    restart: unless-stopped
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Senh@ForteCondominio2026!
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_mvc_data:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Senh@ForteCondominio2026! -Q 'SELECT 1' || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 90s
+    networks:
+      - condominio_mvc_network   
+
+  mvc_condominio:
+    build:
+      context: .
+      dockerfile: Docker_AspNetCore_MVC_Condominio.Web/Dockerfile
+    container_name: mvc_condominio
+    restart: unless-stopped
+    ports:
+      - "5001:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__DefaultConnection: >
+        Server=db_condominio_AspNetCore_MVC,1433;
+        Database=Condominio_mvc;
+        User Id=sa;
+        Password=Senh@ForteCondominio2026!;
+        Encrypt=False;
+        TrustServerCertificate=True;
+        MultipleActiveResultSets=true
+    depends_on:
+      - db_condominio_AspNetCore_MVC
+    networks:
+      - condominio_mvc_network
+
+networks:
+  condominio_mvc_network:
+    driver: bridge
+
+volumes:
+  sqlserver_mvc_data:
