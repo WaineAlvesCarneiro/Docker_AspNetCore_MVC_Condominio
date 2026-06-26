@@ -1,0 +1,40 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Docker_AspNetCore_MVC_Condominio.Web.Data
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User) && !User.IsInRole("Suporte"))
+{
+    <ul class="navbar-nav gap-1">
+        <li class="nav-item">
+            <a class="nav-link text-dark d-flex align-items-center gap-1" asp-area="" asp-controller="Imovels" asp-action="ListarImoveis">
+                <i class="bi bi-houses"></i> Imóveis
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark d-flex align-items-center gap-1" asp-area="" asp-controller="Moradors" asp-action="ListarMoradores">
+                <i class="bi bi-people"></i> Moradores
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark d-flex align-items-center gap-1" asp-area="" asp-controller="Visitantes" asp-action="ListarVisitantes">
+                <i class="bi bi-person-vcard"></i> Visitantes
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark d-flex align-items-center gap-1" asp-area="" asp-controller="Prestadores" asp-action="ListarPrestadores">
+                <i class="bi bi-wrench-adjustable"></i> Prestadores
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark d-flex align-items-center gap-1" asp-area="" asp-controller="EncomendasRecebidas" asp-action="ListarRecebidas">
+                <i class="bi bi-truck"></i> Recebidas
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark d-flex align-items-center gap-1" asp-area="" asp-controller="EncomendasEntregues" asp-action="ListarEntregas">
+                <i class="bi bi-box-seam"></i> Entregas
+            </a>
+        </li>
+    </ul>
+}

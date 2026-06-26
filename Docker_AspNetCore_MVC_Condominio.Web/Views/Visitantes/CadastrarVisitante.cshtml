@@ -1,0 +1,58 @@
+﻿@model Docker_AspNetCore_MVC_Condominio.Web.Models.ImovelViewModel
+@{
+    ViewData["Title"] = "Entrada de Visitante";
+}
+
+<div class="card shadow-sm border-0 rounded-3 p-4 bg-white">
+    <div class="d-flex align-items-center gap-2 mb-4 pb-2 border-bottom">
+        <i class="bi bi-person-vcard text-primary fs-3"></i>
+        <h4 class="fw-bold text-secondary m-0">@ViewData["Title"]</h4>
+    </div>
+
+    <form asp-controller="Visitantes" asp-action="CadastrarVisitante" autocomplete="off">
+        <input type="hidden" asp-for="Imovel!.Id" />
+        <input type="hidden" asp-for="Imovel!.BoxGaragem" />
+        <input type="hidden" asp-for="Imovel!.Apartamento" />
+        <input type="hidden" asp-for="Imovel!.Bloco" />
+        <input type="hidden" asp-for="Imovel!.EmpresaId" />
+
+        <partial name="_ImovelBlocoApto" />
+
+        <div class="row g-4">
+            <div class="col-12">
+                <h6 class="fw-bold text-primary mb-3"><i class="bi bi-card-heading me-1"></i> Dados de Identificação</h6>
+                <div class="row g-3">
+                    <div class="col-md-7">
+                        <div class="form-floating">
+                            <input autofocus asp-for="Visitante!.Nome" class="form-control" placeholder="Nome Completo" />
+                            <label asp-for="Visitante!.Nome">Nome Completo do Visitante</label>
+                            <span asp-validation-for="Visitante!.Nome" class="text-danger small"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-floating">
+                            <input type="date" asp-for="Visitante.DataEntrada" class="form-control" />
+                            <label asp-for="Visitante.DataEntrada">Data de Entrada</label>
+                            <span asp-validation-for="Visitante.DataEntrada" class="text-danger small"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex gap-2 mt-4 pt-3 border-top">
+            <button type="submit" class="btn btn-success px-4 shadow-sm fw-medium">
+                <i class="bi bi-floppy"></i> Salvar
+            </button>
+            <a asp-controller="Imovels" asp-action="DetalharImovel" asp-route-id="@Model.Imovel!.Id" class="btn btn-secondary px-4 fw-medium">
+                <i class="bi bi-x-circle me-1"></i> Cancelar
+            </a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

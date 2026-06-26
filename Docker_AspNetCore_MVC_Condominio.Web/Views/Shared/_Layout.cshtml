@@ -1,0 +1,111 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Docker_AspNetCore_MVC_Condominio.Web.Data
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Condomínio</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <style>
+            footer {
+                margin-bottom: 0 !important;
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: 'Inter', sans-serif;
+                background-color: #f8f9fa;
+                color: #343a40;
+            }
+
+            .navbar-custom {
+                background-color: #ffffff;
+                box-shadow: 0 2px 4px rgba(0,0,0,.04);
+            }
+
+            .navbar-brand {
+                font-weight: 700;
+                letter-spacing: -0.5px;
+            }
+
+            .nav-link {
+                font-weight: 500;
+                transition: color 0.2s ease-in-out;
+            }
+
+            .nav-link:hover {
+                color: #0d6efd !important;
+            }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <header>
+        @{
+            var isLoginPage = ViewContext.RouteData.Values["page"]?.ToString()?.Contains("Login") == true;
+        }
+
+        @if (!isLoginPage)
+        {
+            <nav class="navbar navbar-expand-lg navbar-light navbar-custom mb-4 py-3">
+                <div class="container-fluid px-4">
+                    <a class="navbar-brand text-primary d-flex align-items-center gap-2" asp-area="" asp-controller="Home" asp-action="Index">
+                        <i class="bi bi-building-gear fs-4"></i> Condomínio
+                    </a>
+
+                    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarContent">
+                        <div class="navbar-nav me-auto">
+                            <partial name="_LoginEsqPartial" />
+                        </div>
+                        <div class="navbar-nav align-items-lg-center">
+                            <partial name="_LoginDirPartial" />
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        }
+    </header>
+
+    <div class="container-fluid flex-grow-1 px-4">
+        <main role="main" class="pb-2">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted mt-auto py-2 bg-white shadow-sm">
+        <div class="container-fluid px-4 d-flex justify-content-between align-items-center small">
+            <div>
+                &copy; 2020 - <span class="fw-semibold text-secondary">Condomínio</span>
+            </div>
+            <div class="text-end text-muted opacity-75">
+                Painel Administrativo
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/Itens de Solução/">
+    <File Path=".dockerignore" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="docker-compose.yml" />
+  </Folder>
+  <Project Path="Docker_AspNetCore_MVC_Condominio.Web/Docker_AspNetCore_MVC_Condominio.Web.csproj" Id="a2626f31-bdd1-4ac6-aaf8-01d0fe666e08" />
+</Solution>

@@ -1,0 +1,49 @@
+﻿@model Docker_AspNetCore_MVC_Condominio.Web.Models.ImovelViewModel
+@{
+    ViewData["Title"] = "Aviso Crítico de Exclusão";
+}
+
+<div class="row justify-content-center align-items-center" style="min-height: 65vh;">
+    <div class="col-xl-5 col-lg-7 col-md-9 col-sm-12">
+        <div class="card shadow border-0 rounded-3 bg-white">
+            <div class="card-body p-5 text-center">
+                <div class="display-4 text-danger mb-3">
+                    <i class="bi bi-person-x-fill"></i>
+                </div>
+
+                <h4 class="fw-bold text-secondary mb-2">Excluir Encomenda Entregue?</h4>
+                <p class="text-muted small mb-4">
+                    Esta ação removerá permanentemente o registro desta Encomenda Entregue do sistema do condomínio. Tem certeza que deseja prosseguir?
+                </p>
+
+                @if (Model.EncomendasEntregues != null)
+                {
+                    <div class="bg-light rounded-3 p-3 border text-start mb-4 font-monospace small">
+                        <div><strong>Código Rastreio:</strong> @Model.EncomendasRecebidas.CodigoRastreio</div>
+                        <div><strong>Nome do Morador na Encomenda:</strong> @Model.EncomendasRecebidas.Morador!.Nome</div>
+                        <div><strong>Data da Entrega:</strong> @Model.EncomendasEntregues.DataEntrega.ToString("dd/MM/yyyy")</div>
+                        <div>
+                            <strong>Entregue?:</strong> <span class="badge @(Model.EncomendasRecebidas!.Entregue ?
+                                                                                                                    "bg-success-subtle text-success border border-success-subtle" : "bg-danger-subtle text-danger border border-danger-subtle") px-2 py-1.5 rounded mt-1 fs-7">
+                            @(Model.EncomendasRecebidas!.Entregue ? "Sim" : "Não")
+                        </span>
+                    </div>
+                </div>
+            }
+
+            <form asp-action="ExcluirEntrega" method="post">
+                <input type="hidden" asp-for="EncomendasEntregues!.Id" />
+
+                <div class="d-flex justify-content-center gap-3">
+                    <a asp-action="ListarEntregas" asp-route-id="@Model.EncomendasEntregues!.Id" class="btn btn-secondary px-4 fw-medium">
+                        Não, Cancelar
+                    </a>
+                    <button type="submit" class="btn btn-danger px-4 shadow-sm fw-medium">
+                        Sim, Confirmar Exclusão
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>

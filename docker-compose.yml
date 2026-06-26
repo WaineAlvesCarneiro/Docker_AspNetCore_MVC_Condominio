@@ -1,0 +1,29 @@
+﻿version: '3.9'
+
+services:
+  mvc_condominio:
+    build:
+      context: .
+      dockerfile: Docker_AspNetCore_MVC_Condominio.Web/Dockerfile
+    container_name: mvc_condominio
+    restart: unless-stopped
+    ports:
+      - "5001:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__DefaultConnection: >
+        Server=sqlserver2022;
+        Database=Condominio_mvc;
+        User Id=sa;
+        Password=Senh@ForteCondominio2026!;
+        Encrypt=False;
+        TrustServerCertificate=True;
+        MultipleActiveResultSets=true
+    networks:
+      - infra_net
+
+networks:
+  infra_net:
+    external: true
+    name: infra_net
+    driver: bridge
