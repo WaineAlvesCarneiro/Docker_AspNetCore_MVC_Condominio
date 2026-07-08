@@ -83,7 +83,10 @@ O sistema já vem com uma carga inicial de dados contendo três perfis diferente
 - 🔒 **Controle de acesso** com Microsoft Identity (Roles/Claims)  
 - 🏢 **Multi-empresa básico**: usuário Suporte cadastra empresas antes dos demais cadastros  
 - 🗂️ **Módulos administrativos**: CRUD de imóveis, moradores, visitantes e prestadores  
-- 📦 **Gestão de encomendas**: fluxo completo de recebimento e entrega  
+- 📦 **Gestão de encomendas**: fluxo completo de recebimento e entrega
+
+- 👉 **Validação de CNPJ**: O Sistema valida se o CNPJ digitado é valido.
+- 👉 **CEP**: Ao digitar o CEP o sistema busca os dados de UF, cidade, endereco/logradouro, bairro. 
 
 ---
 
