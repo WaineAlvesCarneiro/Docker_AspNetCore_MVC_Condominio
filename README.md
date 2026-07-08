@@ -14,8 +14,13 @@ Daí surgiu a ideia de criar um sistema para portaria de condomínio totalmente 
 Agora, em **2026**, refiz todo o projeto em **ASP.NET Core MVC (8.0)**, mantendo a estrutura original (sem camadas e sem serviços) para preservar a essência do aprendizado inicial.  
 A principal novidade foi a adaptação para execução em **Docker Compose**, tornando a aplicação facilmente conteinerizada.
 
-Além disso, mantenho outro projeto em **API com DDD**, também voltado para condomínios, que pode ser visto aqui:  
+Além disso, mantenho outro projeto em **API com DDD**, também voltado para condomínios, que pode ser visto aqui:
+
+Versão com frontend React
 👉 [Docker_RabbitMQ_AspNetCore_React_Condominio](https://github.com/WaineAlvesCarneiro/Docker_RabbitMQ_AspNetCore_React_Condominio)
+
+Versão com frontend Angular
+👉 [Docker_RabbitMQ_AspNetCore_Angular_Condominio](https://github.com/WaineAlvesCarneiro/Docker_RabbitMQ_AspNetCore_Angular_Condominio)
 
 ---
 
