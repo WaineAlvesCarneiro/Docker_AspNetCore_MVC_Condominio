@@ -1,4 +1,4 @@
-# AspNetCore Condomínio (Docker & MVC)
+# AspNetCore Condomínio (Docker & MVC com Multitenant)
 
 Bem-vindo ao repositório do projeto **Docker_AspNetCore_MVC_Condominio**.  
 Esta é uma aplicação desenvolvida em **ASP.NET Core MVC (8.0)** voltada para a gestão de condomínios utilizando SaaS multi-tenant.  
