@@ -1,0 +1,47 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Docker_AspNetCore_MVC_Condominio.Web.Data
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<ul class="navbar-nav align-items-lg-center gap-2">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        @if (User.IsInRole("Suporte"))
+        {
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-dark fw-semibold d-flex align-items-center gap-1" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-gear-fill text-secondary"></i> Gerenciar Sistema
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 mt-2" aria-labelledby="adminDropdown">
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center gap-2 py-2" asp-area="" asp-controller="Usuarios" asp-action="ListarUsuarios">
+                            <i class="bi bi-people text-muted"></i> Gerenciar Usuários
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center gap-2 py-2" asp-area="" asp-controller="Empresas" asp-action="ListarEmpresas">
+                            <i class="bi bi-building text-muted"></i> Listar Empresas
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center gap-2 py-2" asp-area="" asp-controller="Role" asp-action="ListarRoles">
+                            <i class="bi bi-shield-lock text-muted"></i> Configurar Roles
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        }
+
+        <li class="nav-item">
+            <a class="nav-link text-primary fw-medium d-flex align-items-center gap-1" asp-area="Identity" asp-page="/Account/Manage/Index" title="Minha Conta">
+                <i class="bi bi-person-circle fs-5"></i> @User.Identity!.Name
+            </a>
+        </li>
+
+        <li class="nav-item ms-lg-2">
+            <a class="nav-link text-danger d-flex align-items-center gap-1 fw-medium border-0 bg-transparent p-0" asp-area="Identity" asp-page="/Account/Logout">
+                <i class="bi bi-box-arrow-right"></i> Sair
+            </a>
+        </li>
+    }
+</ul>

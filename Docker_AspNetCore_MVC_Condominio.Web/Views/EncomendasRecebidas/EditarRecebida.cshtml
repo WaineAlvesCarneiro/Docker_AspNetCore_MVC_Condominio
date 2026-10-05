@@ -1,0 +1,69 @@
+﻿@model Docker_AspNetCore_MVC_Condominio.Web.Models.ImovelViewModel
+@{
+    ViewData["Title"] = "Editar Encomenda Recebida";
+}
+
+<div class="card shadow-sm border-0 rounded-3 p-4 bg-white">
+	<div class="d-flex align-items-center gap-2 mb-4 pb-2 border-bottom">
+        <i class="bi bi-truck text-primary fs-3"></i>
+		<h4 class="fw-bold text-secondary m-0">@ViewData["Title"]</h4>
+	</div>
+
+    <form asp-controller="EncomendasRecebidas" asp-action="EditarRecebida" autocomplete="off">
+		<input type="hidden" asp-for="Imovel!.Id" />
+		<input type="hidden" asp-for="Imovel!.BoxGaragem" />
+		<input type="hidden" asp-for="Imovel!.Apartamento" />
+		<input type="hidden" asp-for="Imovel!.Bloco" />
+		<input type="hidden" asp-for="Imovel!.EmpresaId" />
+
+		<partial name="_ImovelBlocoApto" />
+
+        <div class="row g-4">
+            <div class="col-12">
+               <div class="row g-3">
+                    <div class="col-md-4">
+                        <h6 class="fw-bold text-primary mb-3"><i class="bi bi-truck me-1"></i> Dados da encomenda</h6>
+                        <div class="form-floating">
+                            <input autofocus asp-for="EncomendasRecebidas.CodigoRastreio" class="form-control" placeholder="Código Rastreio" />
+                            <label asp-for="EncomendasRecebidas.CodigoRastreio">Código Rastreio</label>
+                            <span asp-validation-for="EncomendasRecebidas.CodigoRastreio" class="text-danger small"></span>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <h6 class="fw-bold text-primary mb-3"><i class="bi bi-people me-1"></i> Morador na Encomenda</h6>
+                        <div class="form-floating">
+                            <select asp-for="EncomendasRecebidas.Morador.Id"
+                                    asp-items="@(new SelectList(Model.Moradores, "Id", "Nome"))"
+                                    class="form-select py-2-5">
+                                <option value="">-- Selecione um Morador --</option>
+                            </select>
+                            <span asp-validation-for="EncomendasRecebidas.Morador.Id" class="text-danger small"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <h6 class="fw-bold text-primary mb-3"><i class="bi bi-calendar me-1"></i> Data do recebimento</h6>
+                        <div class="form-floating">
+                            <input type="date" asp-for="EncomendasRecebidas.DataRecebimento" asp-format="{0:yyyy-MM-dd}" class="form-control" />
+                            <label asp-for="EncomendasRecebidas.DataRecebimento">Data de Entrada</label>
+                            <span asp-validation-for="EncomendasRecebidas.DataRecebimento" class="text-danger small"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex gap-2 mt-4 pt-3 border-top">
+            <button type="submit" class="btn btn-success px-4 shadow-sm fw-medium">
+                <i class="bi bi-floppy"></i> Salvar
+            </button>
+            <a asp-action="ListarRecebidas" asp-route-id="@Model.EncomendasRecebidas!.Id" class="btn btn-secondary px-4 fw-medium">
+                <i class="bi bi-x-circle"></i> Cancelar
+            </a>
+        </div>
+	</form>
+</div>
+
+@section Scripts {
+    @{
+	await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

@@ -1,0 +1,42 @@
+﻿@model Microsoft.AspNetCore.Identity.IdentityRole
+@{
+    ViewData["Title"] = "Novo Perfil de Acesso";
+}
+
+<div class="card shadow-sm border-0 rounded-3 p-4 bg-white">
+    <div class="d-flex align-items-center gap-2 mb-4 pb-2 border-bottom">
+        <i class="bi bi-shield-plus text-primary fs-3"></i>
+        <h4 class="fw-bold text-secondary m-0">@ViewData["Title"]</h4>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-5 col-lg-7 col-md-9">
+            <form asp-action="CriarRole" autocomplete="off">
+                <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+                <p class="text-muted small mb-3">Defina o nome do novo nível de acesso que será atribuído aos usuários (Ex: Portaria, Zelador, Morador).</p>
+
+                <div class="form-floating mb-4">
+                    <input autofocus asp-for="Name" class="form-control" placeholder="Nome do Perfil" />
+                    <label asp-for="Name">Nome do Perfil (Role)</label>
+                    <span asp-validation-for="Name" class="text-danger small"></span>
+                </div>
+
+                <div class="d-flex gap-2 pt-3 border-top">
+                    <button type="submit" class="btn btn-success px-4 shadow-sm">
+                        <i class="bi bi-floppy me-1"></i> Salvar Perfil
+                    </button>
+                    <a asp-action="ListarRoles" class="btn btn-secondary px-4">
+                        <i class="bi bi-x-circle me-1"></i> Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

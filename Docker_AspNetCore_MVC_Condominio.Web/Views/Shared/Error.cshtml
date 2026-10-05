@@ -1,0 +1,35 @@
+﻿@model ErrorViewModel
+@{
+    ViewData["Title"] = "Aviso do Sistema";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-sm border-0 rounded-3 p-4 bg-white text-center" style="max-width: 500px; margin: 0 auto;">
+        <i class="bi bi-exclamation-triangle-fill text-warning fs-1 mb-3"></i>
+        
+        <h3 class="fw-bold text-secondary mb-2">Aviso</h3>
+        
+        @if (!string.IsNullOrEmpty(Model.Message))
+        {
+            <p class="text-muted fs-5 mb-4">@Model.Message</p>
+        }
+        else
+        {
+            <p class="text-muted fs-5 mb-4">Um erro inesperado ocorreu durante o processamento.</p>
+        }
+
+        <div class="mb-4">
+            <a href="javascript:history.back()" class="btn btn-primary px-4 shadow-sm fw-medium">
+                <i class="bi bi-arrow-left-circle"></i> Voltar
+            </a>
+        </div>
+
+        @if (Model.ShowRequestId)
+        {
+            <hr />
+            <p class="text-start text-muted small m-0">
+                <strong>Request ID:</strong> <code class="text-danger">@Model.RequestId</code>
+            </p>
+        }
+    </div>
+</div>

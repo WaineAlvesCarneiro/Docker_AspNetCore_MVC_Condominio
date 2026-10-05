@@ -1,0 +1,103 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Docker_AspNetCore_MVC_Condominio.Web.Data
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@model Docker_AspNetCore_MVC_Condominio.Web.Models.ImovelViewModel
+@{
+    ViewData["Title"] = "Novo Morador";
+}
+
+<div class="card shadow-sm border-0 rounded-3 p-4 bg-white">
+    <div class="d-flex align-items-center gap-2 mb-4 pb-2 border-bottom">
+        <i class="bi bi-people text-primary fs-3"></i>
+        <h4 class="fw-bold text-secondary m-0">@ViewData["Title"]</h4>
+    </div>
+
+    <partial name="_ImovelBlocoApto" />
+
+    <form asp-action="CadastrarMoradores" enctype="multipart/form-data" autocomplete="off">
+        <input type="hidden" asp-for="Imovel!.Id" />
+        <input type="hidden" asp-for="Imovel!.BoxGaragem" />
+        <input type="hidden" asp-for="Imovel!.Apartamento" />
+        <input type="hidden" asp-for="Imovel!.Bloco" />
+        <input type="hidden" asp-for="Imovel!.EmpresaId" />
+
+        <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+        <div class="row g-4">
+            <div class="col-12">
+                <h6 class="fw-bold text-primary mb-3">
+                    <i class="bi bi-file-earmark-person me-1"></i> Dados Gerais do Morador
+                </h6>
+                <div class="row g-3">
+                    <div class="col-md-5">
+                        <div class="form-floating">
+                            <input autofocus asp-for="Morador!.Nome" class="form-control" placeholder="Nome Completo" />
+                            <label asp-for="Morador!.Nome">Nome Completo</label>
+                            <span asp-validation-for="Morador!.Nome" class="text-danger small"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-floating">
+                            <input asp-for="Morador.Celular" class="form-control" placeholder="Celular" id="celular" />
+                            <label asp-for="Morador.Celular">Celular</label>
+                            <span asp-validation-for="Morador.Celular" class="text-danger small"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-floating">
+                            <input asp-for="Morador!.Email" class="form-control" placeholder="E-mail" />
+                            <label asp-for="Morador!.Email">E-mail de Contato</label>
+                            <span asp-validation-for="Morador!.Email" class="text-danger small"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <h6 class="fw-bold text-primary mb-3"><i class="bi bi-calendar-event me-1"></i> Contrato e Permanência</h6>
+                <div class="row g-3 align-items-center">
+                    <div class="col-md-3">
+                        <label class="form-label text-muted small fw-semibold d-block mb-2">Relação de Ocupação</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" value="1" asp-for="Morador.Proprietario" id="prop" checked />
+                            <label class="form-check-label text-dark" for="prop">Proprietário</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" value="2" asp-for="Morador.Proprietario" id="inq" />
+                            <label class="form-check-label text-dark" for="inq">Inquilino</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-floating">
+                            <input type="date" asp-for="Morador.DataEntrada" class="form-control" />
+                            <label asp-for="Morador.DataEntrada">Data de Entrada</label>
+                            <span asp-validation-for="Morador.DataEntrada" class="text-danger small"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex gap-2 mt-4 pt-3 border-top">
+            <button type="submit" class="btn btn-success px-4 shadow-sm fw-medium">
+                <i class="bi bi-floppy me-1"></i> Salvar
+            </button>
+            <a asp-controller="Imovels" asp-action="DetalharImovel" asp-route-id="@Model.Imovel!.Id" class="btn btn-secondary px-4 fw-medium">
+                <i class="bi bi-arrow-left-circle me-1"></i> Cancelar
+            </a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(function(){
+            $('#celular').mask('(00) 00000-0000');
+        });
+    </script>
+}

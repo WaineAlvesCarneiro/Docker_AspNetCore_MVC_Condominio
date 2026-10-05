@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>$(NoWarn);1591</NoWarn>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="FluentValidation" Version="12.1.1" />
+		<PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="8.0.27" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.0.2" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.27" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.27" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\CondominioSaaSAngular.Application\CondominioSaaSAngular.Application.csproj" />
+		<ProjectReference Include="..\CondominioSaaSAngular.Infrastructure\CondominioSaaSAngular.Infrastructure.csproj" />
+	</ItemGroup>
+
+</Project>

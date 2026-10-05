@@ -1,0 +1,98 @@
+﻿@using Docker_AspNetCore_MVC_Condominio.Web.Helper
+@model IEnumerable<Docker_AspNetCore_MVC_Condominio.Web.Models.Empresa>
+@{
+    ViewData["Title"] = "Lista de Empresas";
+}
+
+<div class="card shadow-sm border-0 rounded-3 p-4 bg-white">
+    <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
+        <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-buildings text-primary fs-3"></i>
+            <h4 class="fw-bold text-secondary m-0">@ViewData["Title"]</h4>
+        </div>
+        <a asp-action="CadastrarEmpresa" class="btn btn-primary d-flex align-items-center gap-2 shadow-sm fw-medium">
+            <i class="bi bi-plus-circle"></i> Adicionar
+        </a>
+    </div>
+
+    <div class="bg-light p-3 rounded-3 border mb-4">
+        <form role="search" method="get" autocomplete="off" class="row g-3 align-items-center">
+            <div class="col-md-3">
+                <div class="form-floating">
+                    <input autofocus type="text" name="razaosocial" id="txtRazaoSocial" class="form-control" placeholder="Razão Social" value="@ViewData["razaosocial"]" />
+                    <label for="txtRazaoSocial">Razão Social</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-floating">
+                    <input type="text" name="cnpj" id="txtCnpj" class="form-control" placeholder="CNPJ" value="@ViewData["cnpj"]" />
+                    <label for="txtCnpj">CNPJ</label>
+                </div>
+            </div>
+            <div class="col-md-auto ms-auto">
+                <button type="submit" class="btn btn-primary py-2.5 px-4 shadow-sm fw-medium d-flex align-items-center justify-content-center gap-2">
+                    <i class="bi bi-search"></i> Pesquisar
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light text-secondary small fw-bold">
+                <tr>
+                    <th>ID</th>
+                    <th>Razão Social</th>
+                    <th>CNPJ</th>
+                    <th>Nome Responsável</th>
+                    <th>Celular</th>
+                    <th>Tipo</th>
+                    <th class="text-end px-3">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="7" class="text-center text-muted py-4">
+                            <i class="bi bi-buildings fs-3 d-block mb-2"></i>
+                            Nenhum registro encontrado.
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td><i class="bi bi-building text-muted me-1"></i> @item.RazaoSocial</td>
+                            <td>@MascaraHelper.FormatarCnpj(@item.Cnpj)</td>
+                            <td>@item.NomeResponsavel</td>
+                            <td>@MascaraHelper.FormatarCelular(@item.Celular)</td>
+                            <td>
+                                <span class="badge @(item.TipoDeCondominio == 1 
+                                    ? "bg-primary-subtle text-primary border border-primary-subtle" : "bg-info-subtle text-info border border-info-subtle") px-3 py-2 fs-6">
+                                    @(item.TipoDeCondominio == 1 ? "Apartamentos" : "Casas")
+                                </span>
+                            </td>
+                            <td class="text-end px-3">
+                                <div class="d-flex justify-content-end gap-1">
+                                    <a asp-action="DetalharEmpresa" asp-route-id="@item.Id" class="btn btn-outline-secondary btn-sm rounded-2" title="Detalhar Empresa">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    <a asp-action="EditarEmpresa" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm rounded-2" title="Editar Empresa">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a asp-action="ExcluirEmpresa" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm rounded-2" title="Excluir Empresa">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

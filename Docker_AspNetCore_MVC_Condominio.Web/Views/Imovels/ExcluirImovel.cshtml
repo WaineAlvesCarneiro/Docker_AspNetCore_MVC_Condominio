@@ -1,0 +1,49 @@
+﻿@model Docker_AspNetCore_MVC_Condominio.Web.Models.ImovelViewModel
+@{
+    ViewData["Title"] = "Aviso Crítico de Exclusão";
+}
+
+<div class="row justify-content-center align-items-center" style="min-height: 65vh;">
+    <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12">
+        <div class="card shadow-lg border-0 rounded-3 bg-white">
+            <div class="card-body p-5 text-center">
+                <div class="display-4 text-danger mb-3">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                </div>
+
+                <h4 class="fw-bold text-secondary mb-2">Excluir a Unidade Residential?</h4>
+
+                <div class="alert alert-danger border-danger-subtle text-start small my-4 p-3 rounded-3 shadow-sm">
+                    <h6 class="alert-heading fw-bold d-flex align-items-center gap-2 text-danger mb-2">
+                        <i class="bi bi-trash3-fill"></i> Atenção: Ação Destrutiva em Cascata!
+                    </h6>
+                    <p class="mb-0 text-dark opacity-75">
+                        Ao confirmar a remoção deste imóvel, o banco de dados apagará **definitivamente** todos os históricos e dados dependentes, incluindo:
+                    </p>
+                    <ul class="mt-2 mb-0 fw-medium text-danger">
+                        <li>Cadastros de moradores e proprietários ativos/antigos</li>
+                        <li>Registros de encomendas pendentes ou entregues</li>
+                        <li>Histórico de liberação de visitantes e prestadores de serviço</li>
+                    </ul>
+                </div>
+
+                <div class="bg-light rounded-3 p-3 border text-start mb-4 font-monospace small">
+                    <strong>Bloco: <span class="fw-bold">@Model.Imovel?.Bloco</span> - Apartamento: <span class="fw-bold">@Model.Imovel?.Apartamento</span></strong>
+                </div>
+
+                <form asp-action="ExcluirImovel" method="post">
+                    <input type="hidden" asp-for="Imovel!.Id" />
+
+                    <div class="d-flex justify-content-center gap-3">
+                        <a asp-action="ListarImoveis" asp-route-id="@Model.Imovel!.Id" class="btn btn-secondary px-4 fw-medium">
+                            Não, Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-danger px-4 shadow-sm fw-medium">
+                            Sim, Confirmar Exclusão
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

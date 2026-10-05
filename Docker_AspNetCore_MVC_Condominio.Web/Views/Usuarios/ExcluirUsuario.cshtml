@@ -1,0 +1,45 @@
+@model Docker_AspNetCore_MVC_Condominio.Web.Models.UsuarioViewModel
+@{
+    ViewData["Title"] = "Revogar Acesso do Usuário";
+}
+
+<div class="row justify-content-center align-items-center" style="min-height: 65vh;">
+    <div class="col-xl-5 col-lg-7 col-md-9 col-sm-12">
+        <div class="card shadow border-0 rounded-3 bg-white">
+            <div class="card-body p-5 text-center">
+                <div class="display-4 text-danger mb-3">
+                    <i class="bi bi-person-x-fill"></i>
+                </div>
+
+                <h4 class="fw-bold text-secondary mb-2">Excluir Conta de Usuário?</h4>
+
+                <div class="alert alert-danger border-danger-subtle text-start small my-4 p-3 rounded-3 shadow-sm">
+                    <h6 class="alert-heading fw-bold d-flex align-items-center gap-2 text-danger mb-2">
+                        <i class="bi bi-exclamation-octagon-fill"></i> Bloqueio Imediato!
+                    </h6>
+                    <p class="mb-0 text-dark opacity-75">
+                        Ao prosseguir, este login será **removido definitivamente** da base de dados de autenticação. O funcionário ou síndico perderá acesso imediato e em tempo real a painéis e portarias vinculadas.
+                    </p>
+                </div>
+
+                <div class="bg-light rounded-3 p-3 border text-start mb-4 font-monospace small">
+                    <div class="mb-1"><strong>Login do Usuário:</strong> @Model.UserName</div>
+                    <div><strong>Perfil Atual:</strong> <span class="badge bg-dark">@Model.Perfil</span></div>
+                </div>
+
+                <form asp-action="ExcluirUsuario" method="post">
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="d-flex justify-content-center gap-3">
+                        <a asp-action="ListarUsuarios" asp-route-id="@Model.Id" class="btn btn-secondary px-4 fw-medium">
+                            Não, Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-danger px-4 shadow-sm fw-medium">
+                            Sim, Remover Conta
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

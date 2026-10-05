@@ -1,0 +1,19 @@
+﻿@inject SignInManager<ApplicationUser> SignInManager
+
+<ul class="nav nav-pills flex-column gap-1">
+    <li class="nav-item">
+        <a class="nav-link py-2 d-flex align-items-center gap-2 @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">
+            <i class="bi bi-person-vcard"></i> Dados do Usuário
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link py-2 d-flex align-items-center gap-2 @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">
+            <i class="bi bi-envelope"></i> E-mail
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link py-2 d-flex align-items-center gap-2 @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">
+            <i class="bi bi-shield-lock"></i> Senha
+        </a>
+    </li>
+</ul>
